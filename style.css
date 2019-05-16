@@ -19,3 +19,80 @@ Underscores is distributed under the terms of the GNU GPL v2 or later.
 Normalizing styles have been helped along thanks to the fine work of
 Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 */
+
+
+.site-footer .site-info {
+    color: white;
+}
+
+.logo-branode {
+    background: url(assets/images/branode-png-210px.png)  center center no-repeat;
+    width: 250px;
+    height: 50px;
+    text-indent: -999999px;
+    overflow: hidden;
+    display: inline-block;
+    margin-left: -21px;
+    margin-top: -6px;
+}
+
+.logo-wp {
+    font-size: 2.3em;
+    top: 5px;
+    position: relative;
+}
+a.logo-wp .fa-wordpress:before {
+    color: #fff;
+}
+
+.site-footer .widget {
+	margin-bottom: 40px;
+}
+
+h2.widget-title {
+	font-size: 1.2rem;
+}
+.site-footer .widget h4 {
+	color: white;
+	font-weight: bold;
+	margin-bottom: 10px;
+	text-align: left;
+	text-transform: uppercase;
+	font-size: 1em;
+	padding-left: 25px;
+}
+.site-footer .widget .widget-wrap {
+	min-height: 40px;
+	vertical-align: top;
+}
+.site-footer .textwidget {
+	text-align: left;
+}
+
+.site-footer ul {
+    list-style: none;
+    text-align: left;
+    padding-left: 25px;
+}
+
+.site-footer .site-info a {
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.site-footer .tagcloud {
+	padding: 0 25px;
+}
+
+.site-info .section-widgets {
+	margin: 20px 0 40px;
+}
+
+.site-info .sponsor {
+	text-align: left;
+	font-size: 1.1em;
+}
+.site-info .site-credits .credits {
+	font-weight: bold;
+	color: white;
+	font-size: 0.9rem;
+}
