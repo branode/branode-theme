@@ -70,7 +70,7 @@ add_action( 'coletivo_footer_site_info', 'coletivo_footer_site_info' );
  *
  * @see wp-content/themes/tema-coletivo/template-frontpage.php
  */
-/*
+
 function add_custom_section_branode(){
 
 $coletivo_branode_id        = get_theme_mod( 'coletivo_branode_id', esc_html__('branode', 'coletivo') );
@@ -115,10 +115,8 @@ if ( ! coletivo_is_selective_refresh() ){ ?>
 wp_reset_query();
 
 }
-add_action( 'coletivo_before_section_hero', 'add_custom_section_branode'  );
- */
+add_action( 'coletivo_before_section_features', 'add_custom_section_branode'  );
 
-/*
 function coletivo_customize_after_register( $wp_customize ) {
 
     $wp_customize->add_section( 'coletivo_branode_settings' ,
@@ -164,7 +162,7 @@ function coletivo_customize_after_register( $wp_customize ) {
     $wp_customize->add_setting( 'coletivo_branode_title',
         array(
             'sanitize_callback' => 'sanitize_text_field',
-            'default'           => esc_html__('Sobre a branode', 'coletivo'),
+            'default'           => esc_html__('Sobre a Branode', 'coletivo'),
         )
     );
     $wp_customize->add_control( 'coletivo_branode_title',
@@ -215,7 +213,7 @@ function coletivo_customize_after_register( $wp_customize ) {
     );
     $wp_customize->add_control( 'coletivo_branode_more_link',
         array(
-            'label'       => esc_html__('More branode button link', 'coletivo'),
+            'label'       => esc_html__('More button link', 'coletivo'),
             'section'     => 'coletivo_branode_settings',
             'description' => esc_html__(  'It should be your blog page link.', 'coletivo' )
         )
@@ -262,4 +260,3 @@ function coletivo_customizer_child_partials( $wp_customize ) {
     );
 }
 add_action( 'customize_register', 'coletivo_customizer_child_partials', 50 );
-*/

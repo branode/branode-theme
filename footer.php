@@ -12,7 +12,8 @@
     <div class="site-prefooter">
         <div class="container">
             <div class="col-sm-6">
-            <a class="logo-branode" rel="license" href="https://branode.com" target="_blank" alt="Branode">Branode</a>
+            <!-- <a class="logo-branode" rel="license" href="https://branode.com" target="_blank" alt="Branode">Branode</a> -->
+            <?php coletivo_site_logo(); ?>
             <br />
             <?php $coletivo_footer_text = get_theme_mod( 'coletivo_footer_text', esc_html__('Few Rights Reserved', 'coletivo') );?>
             <?php if ( $coletivo_footer_text != '' ) echo esc_html( $coletivo_footer_text); ?>

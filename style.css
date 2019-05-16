@@ -111,3 +111,7 @@ a.logo-wp .fa-wordpress:before {
     float: left;
     padding: 10px;
 }
+
+.section-branode .more-link {
+	text-align: center;
+}
