@@ -3,11 +3,10 @@
  * Branode functions and definitions.
  *
  */
-
-function branode_custom_content_width() {
-   return '1040';
+function register_new_menu() {
+  register_nav_menu('bottom-menu',__( 'Menu de Rodapé inferior' ));
 }
-add_filter( 'coletivo_content_width', 'branode_custom_content_width' );
+add_action( 'init', 'register_new_menu' );
 
 function branode_widgets_init() {
 	register_sidebar( array(
@@ -43,12 +42,9 @@ function branode_widgets_init() {
 add_action( 'widgets_init', 'branode_widgets_init' );
 
 
-// add_image_size( 'orbit-custom', 1040, 480, true );
-
-
 // Altera a função do footer, originalmente no arquivo inc/template-tags.php
 
-if ( ! function_exists( 'onepress_footer_site_info' ) ) {
+if ( ! function_exists( 'coletivo_footer_site_info' ) ) {
     /**
      * Add Copyright and Credit text to footer
      * @since 1.1.3
@@ -56,8 +52,11 @@ if ( ! function_exists( 'onepress_footer_site_info' ) ) {
     function coletivo_footer_site_info()
     {
         ?>
-        <div class="row site-credits">
-    		<div class="col-sm-12 credits">
+        <div class="row">
+            <div class="col-sm-6 bottom-menu">
+                <?php wp_nav_menu( array( 'theme_location' => 'bottom-menu' ) ); ?>
+            </div>
+    		<div class="col-sm-6 credits">
             <?php printf(esc_html__('Desenvolvido com %1$s', 'coletivo'), '<a class="logo-wp" href="' . esc_url('https://br.wordpress.org', 'coletivo') . '"><i class="fa fa-wordpress" aria-hidden="true"></i></a>'); ?>
             </div>
         </div>
@@ -69,42 +68,42 @@ add_action( 'coletivo_footer_site_info', 'coletivo_footer_site_info' );
 /**
  * Hook to add custom section before feature section
  *
- * @see wp-content/themes/onepress/template-frontpage.php
+ * @see wp-content/themes/tema-coletivo/template-frontpage.php
  */
 /*
-function add_custom_section_tqfsi(){
+function add_custom_section_branode(){
 
-$coletivo_tqfsi_id        = get_theme_mod( 'coletivo_tqfsi_id', esc_html__('tqfsi', 'coletivo') );
-$coletivo_tqfsi_disable   = get_theme_mod( 'coletivo_tqfsi_disable' ) == 1 ? true : false;
-$coletivo_tqfsi_title     = get_theme_mod( 'coletivo_tqfsi_title', esc_html__('Seção TQFSI', 'coletivo' ));
-$coletivo_tqfsi_subtitle  = get_theme_mod( 'coletivo_tqfsi_subtitle', esc_html__('Section subtitle', 'coletivo' ));
-$coletivo_tqfsi_more_link = get_theme_mod( 'coletivo_tqfsi_more_link', '#' );
-$coletivo_tqfsi_more_text = get_theme_mod( 'coletivo_tqfsi_more_text', esc_html__('More', 'coletivo' ));
-$desc = get_theme_mod( 'coletivo_tqfsi_desc' );
+$coletivo_branode_id        = get_theme_mod( 'coletivo_branode_id', esc_html__('branode', 'coletivo') );
+$coletivo_branode_disable   = get_theme_mod( 'coletivo_branode_disable' ) == 1 ? true : false;
+$coletivo_branode_title     = get_theme_mod( 'coletivo_branode_title', esc_html__('Seção branode', 'coletivo' ));
+$coletivo_branode_subtitle  = get_theme_mod( 'coletivo_branode_subtitle', esc_html__('Section subtitle', 'coletivo' ));
+$coletivo_branode_more_link = get_theme_mod( 'coletivo_branode_more_link', '#' );
+$coletivo_branode_more_text = get_theme_mod( 'coletivo_branode_more_text', esc_html__('More', 'coletivo' ));
+$desc = get_theme_mod( 'coletivo_branode_desc' );
 
 if ( coletivo_is_selective_refresh() ) {
     $disable = false;
 }
-if ( ! $coletivo_tqfsi_disable  ) :
+if ( ! $coletivo_branode_disable  ) :
 
 if ( ! coletivo_is_selective_refresh() ){ ?>
-<section id="<?php if ( $coletivo_tqfsi_id != '' ) echo $coletivo_tqfsi_id; ?>" <?php do_action( 'coletivo_section_atts', 'coletivo' ); ?> class="<?php echo esc_attr( apply_filters( 'coletivo_section_class', 'section-tqfsi section-padding onepage-section', 'coletivo' ) ); ?>">
+<section id="<?php if ( $coletivo_branode_id != '' ) echo $coletivo_branode_id; ?>" <?php do_action( 'coletivo_section_atts', 'coletivo' ); ?> class="<?php echo esc_attr( apply_filters( 'coletivo_section_class', 'section-branode section-padding onepage-section', 'coletivo' ) ); ?>">
 <?php } ?>
     <?php do_action( 'coletivo_section_before_inner', 'coletivo' ); ?>
     <div class="container">
-        <?php if ( $coletivo_tqfsi_title ||  $coletivo_tqfsi_subtitle ||  $desc ) { ?>
+        <?php if ( $coletivo_branode_title ||  $coletivo_branode_subtitle ||  $desc ) { ?>
         <div class="section-title-area">
-            <?php if ( $coletivo_tqfsi_subtitle != '' ) echo '<h5 class="section-subtitle">' . esc_html( $coletivo_tqfsi_subtitle ) . '</h5>'; ?>
-            <?php if ( $coletivo_tqfsi_title != '' ) echo '<h2 class="section-title">' . esc_html( $coletivo_tqfsi_title ) . '</h2>'; ?>
+            <?php if ( $coletivo_branode_subtitle != '' ) echo '<h5 class="section-subtitle">' . esc_html( $coletivo_branode_subtitle ) . '</h5>'; ?>
+            <?php if ( $coletivo_branode_title != '' ) echo '<h2 class="section-title">' . esc_html( $coletivo_branode_title ) . '</h2>'; ?>
             <?php if ( $desc ) {
                 echo '<div class="section-desc">' . apply_filters( 'the_content', wp_kses_post( $desc ) ) . '</div>';
             } ?>
         </div>
         <?php } ?>
 
-        <?php if ( $coletivo_tqfsi_more_link != '' ) { ?>
+        <?php if ( $coletivo_branode_more_link != '' ) { ?>
     <div class="more-link">
-        <a class="btn btn-theme-primary btn-lg" href="<?php echo esc_url($coletivo_tqfsi_more_link) ?>"><?php if ( $coletivo_tqfsi_more_text != '' ) echo esc_html( $coletivo_tqfsi_more_text ); ?></a>
+        <a class="btn btn-theme-primary btn-lg" href="<?php echo esc_url($coletivo_branode_more_link) ?>"><?php if ( $coletivo_branode_more_text != '' ) echo esc_html( $coletivo_branode_more_text ); ?></a>
     </div>
     <?php } ?>
     </div>
@@ -116,117 +115,82 @@ if ( ! coletivo_is_selective_refresh() ){ ?>
 wp_reset_query();
 
 }
-add_action( 'coletivo_before_section_hero', 'add_custom_section_tqfsi'  );
-
-function add_custom_section_tqfsi_search(){
-$coletivo_tqfsi_search_disable   = get_theme_mod( 'coletivo_tqfsi_search_disable' ) == 1 ? true : false;
-$coletivo_tqfsi_search_title     = get_theme_mod( 'coletivo_tqfsi_search_title', esc_html__('Search', 'coletivo' ));
-
-if ( coletivo_is_selective_refresh() ) {
-    $disable = false;
-}
-if ( ! $coletivo_tqfsi_search_disable  ) :
-
-if ( ! coletivo_is_selective_refresh() ){ ?>
-<section id="tqfsi-search" <?php do_action( 'coletivo_section_atts', 'coletivo' ); ?> class="<?php echo esc_attr( apply_filters( 'coletivo_section_class', 'section-tqfsi-search section-padding onepage-section', 'coletivo' ) ); ?>">
-<?php } ?>
-    <?php do_action( 'coletivo_section_before_inner', 'coletivo' ); ?>
-    <div class="container">
-        <div class="section-content">
-                <div class="row">
-                        <?php if ( $coletivo_tqfsi_search_title ) { ?>
-                    <div class="section-title-area">
-                        <?php if ( $coletivo_tqfsi_search_title != '' ) echo '<h2 class="section-title search-title">' . esc_html( $coletivo_tqfsi_search_title ) . '</h2>'; ?>
-                    </div>
-                        <?php } ?>
-                            <div class="col-sm-12 home-search">
-                                <?php get_search_form(); ?>
-                            </div>
-                </div>
-        </div>
-    </div>
-    <?php do_action( 'coletivo_section_after_inner', 'tainacan' ); ?>
-<?php if ( ! coletivo_is_selective_refresh() ){ ?>
-</section>
-<?php } ?>
-<?php endif;
-
-}
-add_action( 'coletivo_after_section_features', 'add_custom_section_tqfsi_search'  );
+add_action( 'coletivo_before_section_hero', 'add_custom_section_branode'  );
  */
+
 /*
 function coletivo_customize_after_register( $wp_customize ) {
 
-    $wp_customize->add_section( 'coletivo_tqfsi_settings' ,
+    $wp_customize->add_section( 'coletivo_branode_settings' ,
         array(
             'priority'    => 0,
             'capability'     => 'edit_theme_options',
             'theme_supports' => '',
-            'title'       => esc_html__( 'Seção TQFSI', 'coletivo' ),
+            'title'       => esc_html__( 'Seção branode', 'coletivo' ),
             'description' => '',
             'panel'          => 'theme_options',
         )
     );
     // Show Content
-    $wp_customize->add_setting( 'coletivo_tqfsi_disable',
+    $wp_customize->add_setting( 'coletivo_branode_disable',
         array(
             'sanitize_callback' => 'coletivo_sanitize_checkbox',
             'default'           => '',
         )
     );
-    $wp_customize->add_control( 'coletivo_tqfsi_disable',
+    $wp_customize->add_control( 'coletivo_branode_disable',
         array(
             'type'        => 'checkbox',
             'label'       => esc_html__('Hide this section?', 'coletivo'),
-            'section'     => 'coletivo_tqfsi_settings',
+            'section'     => 'coletivo_branode_settings',
             'description' => esc_html__('Check this box to hide this section.', 'coletivo'),
         )
     );
     // Section ID
-    $wp_customize->add_setting( 'coletivo_tqfsi_id',
+    $wp_customize->add_setting( 'coletivo_branode_id',
         array(
             'sanitize_callback' => 'coletivo_sanitize_text',
-            'default'           => esc_html__('tqfsi', 'coletivo'),
+            'default'           => esc_html__('branode', 'coletivo'),
         )
     );
-    $wp_customize->add_control( 'coletivo_tqfsi_id',
+    $wp_customize->add_control( 'coletivo_branode_id',
         array(
             'label'     => esc_html__('Section ID:', 'coletivo'),
-            'section'       => 'coletivo_tqfsi_settings',
+            'section'       => 'coletivo_branode_settings',
             'description'   => esc_html__( 'The section id, we will use this for link anchor.', 'coletivo' )
         )
     );
     // Title
-    $wp_customize->add_setting( 'coletivo_tqfsi_title',
+    $wp_customize->add_setting( 'coletivo_branode_title',
         array(
             'sanitize_callback' => 'sanitize_text_field',
-            'default'           => esc_html__('Sobre a TQFSI', 'coletivo'),
+            'default'           => esc_html__('Sobre a branode', 'coletivo'),
         )
     );
-    $wp_customize->add_control( 'coletivo_tqfsi_title',
+    $wp_customize->add_control( 'coletivo_branode_title',
         array(
             'label'     => esc_html__('Section Title', 'coletivo'),
-            'section'       => 'coletivo_tqfsi_settings',
+            'section'       => 'coletivo_branode_settings',
             'description'   => '',
         )
     );
     // Sub Title
-    $wp_customize->add_setting( 'coletivo_tqfsi_subtitle',
+    $wp_customize->add_setting( 'coletivo_branode_subtitle',
         array(
             'sanitize_callback' => 'sanitize_text_field',
             'default'           => esc_html__('Section subtitle', 'coletivo'),
         )
     );
-    $wp_customize->add_control( 'coletivo_tqfsi_subtitle',
+    $wp_customize->add_control( 'coletivo_branode_subtitle',
         array(
             'label'     => esc_html__('Section Subtitle', 'coletivo'),
-            'section'       => 'coletivo_tqfsi_settings',
+            'section'       => 'coletivo_branode_settings',
             'description'   => '',
         )
     );
 
     // Description
-    $wp_customize->add_setting( 'coletivo_tqfsi_desc',
+    $wp_customize->add_setting( 'coletivo_branode_desc',
         array(
             'sanitize_callback' => 'coletivo_sanitize_text',
             'default'           => '',
@@ -234,68 +198,38 @@ function coletivo_customize_after_register( $wp_customize ) {
     );
     $wp_customize->add_control( new coletivo_Editor_Custom_Control(
         $wp_customize,
-        'coletivo_tqfsi_desc',
+        'coletivo_branode_desc',
         array(
             'label'         => esc_html__('Section Description', 'coletivo'),
-            'section'       => 'coletivo_tqfsi_settings',
+            'section'       => 'coletivo_branode_settings',
             'description'   => '',
         )
     ));
 
     // More Button
-    $wp_customize->add_setting( 'coletivo_tqfsi_more_link',
+    $wp_customize->add_setting( 'coletivo_branode_more_link',
         array(
             'sanitize_callback' => 'esc_url',
             'default'           => '#',
         )
     );
-    $wp_customize->add_control( 'coletivo_tqfsi_more_link',
+    $wp_customize->add_control( 'coletivo_branode_more_link',
         array(
-            'label'       => esc_html__('More tqfsi button link', 'coletivo'),
-            'section'     => 'coletivo_tqfsi_settings',
+            'label'       => esc_html__('More branode button link', 'coletivo'),
+            'section'     => 'coletivo_branode_settings',
             'description' => esc_html__(  'It should be your blog page link.', 'coletivo' )
         )
     );
-    $wp_customize->add_setting( 'coletivo_tqfsi_more_text',
+    $wp_customize->add_setting( 'coletivo_branode_more_text',
         array(
             'sanitize_callback' => 'sanitize_text_field',
             'default'           => esc_html__('More', 'coletivo'),
         )
     );
-    $wp_customize->add_control( 'coletivo_tqfsi_more_text',
+    $wp_customize->add_control( 'coletivo_branode_more_text',
         array(
             'label'         => esc_html__('More Button', 'coletivo'),
-            'section'       => 'coletivo_tqfsi_settings',
-            'description'   => '',
-        )
-    );
-
-    // Show Search
-    $wp_customize->add_setting( 'coletivo_tqfsi_search_disable',
-        array(
-            'sanitize_callback' => 'coletivo_sanitize_checkbox',
-            'default'           => '',
-        )
-    );
-    $wp_customize->add_control( 'coletivo_tqfsi_search_disable',
-        array(
-            'type'        => 'checkbox',
-            'label'       => esc_html__('Hide the TQFSI search section?', 'coletivo'),
-            'section'     => 'coletivo_tqfsi_settings',
-            'description' => esc_html__('Check this box to hide this section.', 'coletivo'),
-        )
-    );
-    // Search Title
-    $wp_customize->add_setting( 'coletivo_tqfsi_search_title',
-        array(
-            'sanitize_callback' => 'sanitize_text_field',
-            'default'           => esc_html__('Search', 'coletivo'),
-        )
-    );
-    $wp_customize->add_control( 'coletivo_tqfsi_search_title',
-        array(
-            'label'     => esc_html__('Search', 'coletivo'),
-            'section'       => 'coletivo_tqfsi_settings',
+            'section'       => 'coletivo_branode_settings',
             'description'   => '',
         )
     );
@@ -313,26 +247,16 @@ function coletivo_customizer_child_partials( $wp_customize ) {
 
     $selective_refresh_keys = array(
 
-        // section tqfsi
+        // section branode
         array(
-            'id' => 'tqfsi',
-            'selector' => '.section-tqfsi',
+            'id' => 'branode',
+            'selector' => '.section-branode',
             'settings' => array(
-                'coletivo_tqfsi_title',
-                'coletivo_tqfsi_subtitle',
-                'coletivo_tqfsi_desc',
-                'coletivo_tqfsi_more_text',
-                'coletivo_tqfsi_more_link',
-            ),
-        ),
-
-        // section tqfsi search
-        array(
-            'id' => 'tqfsi-search',
-            'selector' => '.section-tqfsi-search',
-            'settings' => array(
-                'coletivo_tqfsi_search_title',
-                'coletivo_tqfsi_search_disable',
+                'coletivo_branode_title',
+                'coletivo_branode_subtitle',
+                'coletivo_branode_desc',
+                'coletivo_branode_more_text',
+                'coletivo_branode_more_link',
             ),
         )
     );

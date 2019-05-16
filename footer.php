@@ -9,25 +9,30 @@
  * @package coletivo
  */
 ?>
-    <div class="container">
-        <div class="col-sm-6 sponsor">
-        <a class="logo-branode" rel="license" href="https://branode.com" target="_blank" alt="Branode">Branode</a>
-        <br />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel euismod elit, convallis lacinia nulla. Mauris quis neque vitae erat fringilla dictum. Fusce sagittis dui non scelerisque porttitor. Praesent dictum nec erat sed cursus. Pellentesque egestas vel justo in tincidunt. Aliquam interdum volutpat ornare. <br />
+    <div class="site-prefooter">
+        <div class="container">
+            <div class="col-sm-6">
+            <a class="logo-branode" rel="license" href="https://branode.com" target="_blank" alt="Branode">Branode</a>
+            <br />
+            <?php $coletivo_footer_text = get_theme_mod( 'coletivo_footer_text', esc_html__('Few Rights Reserved', 'coletivo') );?>
+            <?php if ( $coletivo_footer_text != '' ) echo esc_html( $coletivo_footer_text); ?>
+            <br />
+            </div>
+            <div class="col-sm-6">
+                    <div class="row section-widgets">
+                            <div class="col-lg-4 col-sm-6">
+                               <?php dynamic_sidebar('sidebar-3'); ?>
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                <?php dynamic_sidebar('sidebar-4'); ?>
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                <?php dynamic_sidebar('sidebar-5'); ?>
+                            </div>
+                    </div>
+            </div>
         </div>
-        <div class="col-sm-6">
-                <div class="row section-widgets">
-                        <div class="col-lg-4 col-sm-6">
-                           <?php dynamic_sidebar('sidebar-3'); ?>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <?php dynamic_sidebar('sidebar-4'); ?>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <?php dynamic_sidebar('sidebar-5'); ?>
-                        </div>
-                </div>
-        </div>
-    </div> 
+    </div>
     <footer id="colophon" class="site-footer" role="contentinfo">
         <?php $coletivo_btt_disable = get_theme_mod( 'coletivo_btt_disable' ); ?>
         <div class="site-info">
